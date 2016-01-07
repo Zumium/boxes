@@ -1,0 +1,7 @@
+The purpose of developing this tool is to use files as you want while still keep those files ordered and organised.
+
+We usually need to download,edit or create several files to make some work done in everyday's life. But we used to forget those files once we finish our work. So the files in computer's disk become more and more and leave us a huge mess at last.
+
+The tool I'm designing and developing is to solve the mess caused by large amount of unorganised files. 
+
+Usually, several files are created on your computer when you are to finish a task. So those files are attached to the thing that you are doing. In the design, A "Box" represents a task that you are doing or have done. The "Box" contains the files you need to finish the task. In real situation, "Box" is actually a file folder managed by software. Users won't use it directly, but create symbolic links of it or the files in it by command line. User can delete it or  pack it to a compressed file once the work is done as well.
