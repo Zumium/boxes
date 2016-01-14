@@ -1,0 +1,12 @@
+1. unarchived folders' path
+2. archived folders' path
+
+For each box:
+User Editable:	1. Description
+		2. expirt date
+		3. creator
+		4. create date
+		5. 
+
+User Uneditable:
+	1. Link file list
