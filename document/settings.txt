@@ -4,9 +4,18 @@
 For each box:
 User Editable:	1. Description
 		2. expirt date
-		3. creator
-		4. create date
-		5. 
+		3. author
+
+For each file:
+User Editable:	1. Description
+		2. author
 
 User Uneditable:
-	1. Link file list
+	1. File list in the box
+	2. Link file list
+	3. create date
+
+Software Settings:
+	Config file position: 1. ~/.boxesrc
+				2. /usr/local/etc/boxes/boxesrc
+				3. /etc/boxes/boxesrc
