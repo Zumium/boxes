@@ -1,13 +1,13 @@
 XML Format:
 
-<cmdparam>
+<cmd>
 	<action paranum=0,1,2,...>
-		new add del mv link ...
+		new mv del link fresh ...
 	</action>
-	<para index=0,1,... type=box,file,boxfile,path>
+	<para place=dest,src type=box,file,boxfile,path>
 		<box>BOX_NAME</box>
 		<file>FILE_NAME</file>
 		===============================
 		<path>PATH</path>
 	</para>
-</cmdparam>
+</cmd>
