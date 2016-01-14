@@ -22,4 +22,4 @@ boxes new BOX_NAME:FILE_NAME //considering,not decided yet
 
 boxes set SETTING_NAME SETTING_VALUE
 
-
+boxes fresh
