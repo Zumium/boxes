@@ -1,0 +1,13 @@
+XML Format:
+
+<cmd>
+	<action paranum=0,1,2,...>
+		new mv del link fresh ...
+	</action>
+	<para place=dest,src type=box,file,boxfile,path>
+		<box>BOX_NAME</box>
+		<file>FILE_NAME</file>
+		===============================
+		<path>PATH</path>
+	</para>
+</cmd>
