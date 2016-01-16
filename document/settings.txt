@@ -2,20 +2,13 @@
 2. archived folders' path
 
 For each box:
-User Editable:	1. Description
-		2. expirt date
-		3. author
 		4. Notes
 
 For each file:
-User Editable:	1. Description
-		2. author
 		3. notes
 
 User Uneditable:
-	1. File list in the box
 	2. Link file list
-	3. create date
 
 Software Settings:
 	Config file position: 1. ~/.boxesrc

@@ -6,8 +6,10 @@ boxes list-boxes
 boxes list-arch
 boxes list BOX_NAME //list files in the box
 
+boxes note BOX_NAME[:FILENAME]
+
 boxes link BOX_NAME[:FILE_NAME] [PATH]
-boxes unlink [FILE_NAME]
+boxes unlink BOX_NAME
 
 boxes archive BOX_NAME
 boxes unarchive BOX_NAME
@@ -18,8 +20,5 @@ boxes export BOX_NAME
 boxes add BOX_NAME FILE_NAME
 boxes del BOX_NAME:FILE_NAME
 boxes mv BOX_NAME:FILE_NAME [BOX_NAME:]FILE_NAME
-boxes new BOX_NAME:FILE_NAME //considering,not decided yet
-
-boxes set SETTING_NAME SETTING_VALUE
 
 boxes fresh
