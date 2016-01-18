@@ -1,12 +1,10 @@
 boxes create BOX_NAME
-boxes del BOX_NAME
+boxes drop BOX_NAME
 boxes mv BOX_NAME NEW_BOX_NAME
 boxes list // list all boxes
 boxes list-boxes
 boxes list-arch
 boxes list BOX_NAME //list files in the box
-
-boxes note BOX_NAME[:FILENAME]
 
 boxes link BOX_NAME[:FILE_NAME] [PATH]
 boxes unlink BOX_NAME
