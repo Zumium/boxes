@@ -1,12 +1,6 @@
 1. unarchived folders' path
 2. archived folders' path
 
-For each box:
-		4. Notes
-
-For each file:
-		3. notes
-
 User Uneditable:
 	2. Link file list
 
