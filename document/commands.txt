@@ -12,6 +12,8 @@ boxes unlink BOX_NAME
 boxes archive BOX_NAME
 boxes unarchive BOX_NAME
 
+boxes path BOX_NAME
+
 boxes import BOX_ARCHIVE_FILE_NAME
 boxes export BOX_NAME
 
