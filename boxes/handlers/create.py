@@ -33,5 +33,5 @@ def handle(storageXML,cmdXML):
 	os.mkdir(boxFolderFullPath)
 	#create hidden folder for storaging links
 	hiddenLinkFolderName='/.box'
-	os.mkdir(boxFolderFullPath+boxName+hiddenLinkFolderName)
+	os.mkdir(boxFolderFullPath+hiddenLinkFolderName)
 	
