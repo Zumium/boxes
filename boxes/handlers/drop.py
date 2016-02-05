@@ -36,11 +36,10 @@ def handle(storageXML,cmdXML):
 		print("the box required doesn't exist")
 		exit()
 	#double check 
-		print('Are you going to delete box:{}(y/N)'.format(boxName))
-		answer=input()
-		if answer=='y':
-			if boxPath['isfolder']:
-				shutil.rmtree(boxPath['path'])
-			else:
-				os.remove(boxPath['path'])
-	
+	print('Are you going to delete box:{}(y/N)'.format(boxName))
+	answer=input()
+	if answer=='y':
+		if boxPath['isfolder']:
+			shutil.rmtree(boxPath['path'])
+		else:
+			os.remove(boxPath['path'])
