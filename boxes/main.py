@@ -5,6 +5,7 @@ from boxes.handlers import *
 
 import xml.etree.ElementTree as ET
 import configparser
+import os.path
 
 def main():
 	#get command line arguments in xml tree format
@@ -16,8 +17,8 @@ def main():
 	folderPath=config['Default']['FolderPath']
 	archivePath=config['Default']['ArchivePath']
 	storage=ET.Element('storage')
-	ET.SubElement(storage,'folderPath').text=folderPath
-	ET.SubElement(storage,'archivePath').text=archivePath
+	ET.SubElement(storage,'folderPath').text=os.path.expanduser(folderPath) #Notice: in case that the user uses '~' symbol
+	ET.SubElement(storage,'archivePath').text=os.path.expanduser(archivePath)
 	
 	#
 	operaHandlers={'create':create.handle,'drop':drop.handle}
