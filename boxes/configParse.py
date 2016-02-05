@@ -21,7 +21,7 @@ def readConfig(configPath):
 	config.read(configPath)
 	return config
 
-def saveConfig(config,configPath):
-	configfile=open(configPath,'w')
-	config.write(configfile)
-	configfile.close()
+#def saveConfig(config,configPath):
+#	configfile=open(configPath,'w')
+#	config.write(configfile)
+#	configfile.close()

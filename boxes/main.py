@@ -11,7 +11,7 @@ def main():
 	xmlCmdArgs=argsParse.parseCmdline()
 	#get configfile
 	configPath=configParse.getConfigPath()
-	config=configParse.read(configPath)
+	config=configParse.readConfig(configPath)
 	#get folders and archives path and pack them into xml
 	folderPath=config['Default']['FolderPath']
 	archivePath=config['Default']['ArchivePath']
