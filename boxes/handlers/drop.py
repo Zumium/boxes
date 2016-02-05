@@ -6,6 +6,11 @@ def handle(storageXML,cmdXML):
 	#get folderpath and archivepath
 	folderPath=storageXML.find('folderPath').text
 	archivePath=storageXML.find('archivePath').text
+	#add / charactor if it is missing
+	if folderPath[len(folderPath)-1] != '/':
+		folderPath+='/'
+	if archivePath[len(archivePath)-1] != '/':
+		archivePath+='/'
 	#check number of parameters
 	actionElem=cmdXML.find('action')
 	if actionElem.attrib['paranum'] != '1':
