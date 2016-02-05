@@ -3,8 +3,7 @@ import os
 import os.path
 
 def getConfigPath():
-	configPath=['~/.boxesrc','/usr/local/etc/boxes/boxesrc','/etc/boxes/boxesrc']
-	os.path.expanduser(configPath[0])
+	configPath=[os.path.expanduser('~/.boxesrc'),'/usr/local/etc/boxes/boxesrc','/etc/boxes/boxesrc']
 	config=None
 	for confPath in configPath:
 		if os.path.isfile(confPath):
