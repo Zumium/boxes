@@ -13,7 +13,7 @@ def handle(storageXML,cmdXML):
 		exit()
 	#check parameter type
 	paraElem=cmdXML.find('para')
-	paraElem.attrib['type'] != 'box':
+	if paraElem.attrib['type'] != 'box':
 		print('DROP command can be followed only with box name')
 		exit()
 	#create box folder under folderPath
