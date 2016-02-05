@@ -1,0 +1,4 @@
+<storage>
+	<folderPath> FOLDER_PATH </folderPath>
+	<archivePath> ARCHIVE_PATH </archivePath>
+</storage>

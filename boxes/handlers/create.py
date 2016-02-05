@@ -1,7 +1,10 @@
 import os
 import xml.etree.ElementTree as ET
 
-def createHandler(folderPath,archivePath,cmdXML):
+def handle(storageXML,cmdXML):
+	#get folderpath and archivepath
+	folderPath=storageXML.find('folderPath').text
+	archivePath=storageXML.find('archivePath').text
 	#check number of parameters
 	actionElem=cmdXML.find('action')
 	if actionElem.attrib['paranum'] != '1':

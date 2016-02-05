@@ -11,15 +11,3 @@ XML Format:
 		<path>PATH</path>
 	</para>
 </cmd>
-
-<cmd>
-	<action paranum=2>
-		set
-	</action>
-	<para index='0' type='setting_key'>
-		...
-	</para>
-	<para index='1' type='setting_value'>
-		...
-	</para>
-</cmd>
