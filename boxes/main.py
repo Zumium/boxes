@@ -21,7 +21,7 @@ def main():
 	ET.SubElement(storage,'archivePath').text=os.path.expanduser(archivePath)
 	
 	#
-	operaHandlers={'create':create.handle,'drop':drop.handle,'list-boxes':list_boxes.handle}
+	operaHandlers={'create':create.handle,'drop':drop.handle,'list-boxes':list_boxes.handle,'list-arch':list_archives}
 	cmdAction=xmlCmdArgs.find('action').text
 	operaHandlers[cmdAction](storage,xmlCmdArgs)
 	
