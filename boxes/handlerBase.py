@@ -70,7 +70,7 @@ class BaseHandler:
 				newPara['type']='box'
 				newPara['box']=x.find('box').text
 			elif x.attrib['type'] == 'boxfile':
-				newPara['type']='boxfile':
+				newPara['type']='boxfile'
 				newPara['box']=x.find('box').text
 				newPara['file']=x.find('file').text
 			elif x.attrib['type'] == 'path':

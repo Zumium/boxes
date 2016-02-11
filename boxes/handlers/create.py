@@ -1,6 +1,6 @@
-from boxes import BaseHandler
+from boxes import handlerBase
 
-class CreateHandler(BaseHandler):
+class CreateHandler(handlerBase.BaseHandler):
 
 	def handle():
 		import os
