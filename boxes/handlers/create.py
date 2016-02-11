@@ -2,29 +2,29 @@ from boxes import handlerBase
 
 class CreateHandler(handlerBase.BaseHandler):
 
-	def __init__(self):
-		super().__init__()
+	def init(self):
+		super().init()
 
 	def handle(self):
 		super().handle()
 		import os
 		#check number of arguments
-		if self.__argumentNum != 1:
+		if self.argumentNum != 1:
 			print('CREATE command should be followed with only one argument')
 			return
 		#check arugments' type
-		if self.__arguments[0]['type'] != 'box':
+		if self.arguments[0]['type'] != 'box':
 			print('CREATE command can only be followed with box name')
 			return
 		#check if the box already exists
-		boxName=self.__arguments[0]['box']
-		if self.__checkBoxExists(boxName):
+		boxName=self.arguments[0]['box']
+		if self.checkBoxExists(boxName):
 			print('box {} already exists'.format(boxName))
 			return
-		elif self.__checkArchivedBoxExists(boxName):
+		elif self.checkArchivedBoxExists(boxName):
 			print('box {} already exists as an archived box'.format(boxName))
 			return
 		#create the box
-		os.mkdir(self.__getFullBoxPath(boxName))
+		os.mkdir(self.getFullBoxPath(boxName))
 		#create specific foler
-		os.mkdir(self.__getBoxSpecificFolderPath(boxName))
+		os.mkdir(self.getBoxSpecificFolderPath(boxName))

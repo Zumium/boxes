@@ -1,69 +1,69 @@
 class BaseHandler:
 	
-	def __init__(self):
+	def init(self):
 		import platform
 		#set up memeber variables
-		self.__folderPath=None #unarchived boxes' path
-		self.__archivePath=None #archived boxes' path
-		self.__argumentNum=None #numbers of parameters
-		self.__arguments=None #parsed arguments are stored here
-		self.__pathSeperator=None # '/' for UNIX-like and '\' for Windows
-		self.__archiveTail='.tar.gz' #compression format
+		self.folderPath=None #unarchived boxes' path
+		self.archivePath=None #archived boxes' path
+		self.argumentNum=None #numbers of parameters
+		self.arguments=None #parsed arguments are stored here
+		self.pathSeperator=None # '/' for UNIX-like and '\' for Windows
+		self.archiveTail='.tar.gz' #compression format
 
 		#figure out current system type. UNIX or Windows?
 		if platform.system() == 'Windows':
 			#it's running on Windows
-			self.__pathSeperator='\\'
+			self.pathSeperator='\\'
 		else:
 			#it's running on UNIX or UNIX-like
-			self.__pathSeperator='/'
+			self.pathSeperator='/'
 		
 	
 	def setBoxPath(self,boxPath,archivePath):
 		#expand ~ to user's real home path
 		import os.path
-		self.__folderPath=os.path.expanduser(boxPath)
-		self.__archivePath=os.path.expanduser(archivePath)
+		self.folderPath=os.path.expanduser(boxPath)
+		self.archivePath=os.path.expanduser(archivePath)
 		#add / to the end of path if they didn't
-		if self.__folderPath[-1] != self.__pathSeperator:
+		if self.folderPath[-1] != self.pathSeperator:
 			#it doesn't have. Add it on
-			self.__folderPath+=self.__pathSeperator
-		if self.__archivePath[-1] != self.__pathSeperator:
+			self.folderPath+=self.pathSeperator
+		if self.archivePath[-1] != self.pathSeperator:
 			#it doesn't have
-			self.__archivePath+=self.__pathSeperator
+			self.archivePath+=self.pathSeperator
 		#check if they exist
-		if not (os.path.isdir(self.__folderPath) and os.path.isdir(self.__archivePath)):
+		if not (os.path.isdir(self.folderPath) and os.path.isdir(self.archivePath)):
 			raise ValueError()
 
-	def __checkBoxExists(self,boxName):
+	def checkBoxExists(self,boxName):
 		import os.path
-		boxPath=self.__folderPath+boxName
+		boxPath=self.folderPath+boxName
 		return os.path.isdir(boxPath)
 
-	def __checkArchivedBoxExists(self,boxName):
+	def checkArchivedBoxExists(self,boxName):
 		import os.path
-		boxPath=self.__archivePath+boxName+self.__archiveTail
+		boxPath=self.archivePath+boxName+self.archiveTail
 		return os.path.isfile(boxPath)
 
-	def __getFullBoxPath(self,boxName,withSlash=False):
-		boxPath=self.__folderPath+boxName
+	def getFullBoxPath(self,boxName,withSlash=False):
+		boxPath=self.folderPath+boxName
 		if withSlash:
-			boxPath+=self.__pathSeperator
+			boxPath+=self.pathSeperator
 		return boxPath
 
-	def __getFullArchivedBoxPath(self,boxName):
-		return self.__archivePath+boxName+self.__archiveTail
+	def getFullArchivedBoxPath(self,boxName):
+		return self.archivePath+boxName+self.archiveTail
 
-	def __getBoxSpecificFolderPath(self,boxName,withSlash=False):
-		SpeFolder=self.__getFullBoxPath(boxName,withSlash=True)+'.box'
+	def getBoxSpecificFolderPath(self,boxName,withSlash=False):
+		SpeFolder=self.getFullBoxPath(boxName,withSlash=True)+'.box'
 		if withSlash:
-			SpeFolder+=self.__pathSeperator
+			SpeFolder+=self.pathSeperator
 		return SpeFolder
  
 	def putArgument(self,cmdXML):
 		import xml.etree.ElementTree as ET
-		self.__argumentNum=int(cmdXML.find('action').attrib['paranum'])
-		self.__arguments=list()
+		self.argumentNum=int(cmdXML.find('action').attrib['paranum'])
+		self.arguments=list()
 		for x in cmdXML.findall('para'):
 			newPara=dict()
 			if x.attrib['type'] == 'box':
@@ -78,7 +78,7 @@ class BaseHandler:
 				newPara['path']=x.find('path').text
 			else:
 				raise NameError('No such arugment type: {}'.format(x.attrib['type']))
-			self.__arguments.insert(int(x.attrib['index']),newPara)
+			self.arguments.insert(int(x.attrib['index']),newPara)
 
 	def handle(self):
 		#leave this function for blank now
