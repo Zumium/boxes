@@ -41,6 +41,15 @@ def handle(storageXML,cmdXML):
 		shutil.copy(srcPath,boxPath)
 	elif os.path.isdir(srcPath):
 		#copy whole directory into box folder
+		#get source dir name
+		srcDir=None
+		srcPathSplit=srcPath.split('/')
+		if srcPathSplit[-1] == '':
+			srcDir=srcPathSplit[-2]
+		else:
+			srcDir=srcPathSplit[-1]
+		#combine srcDir and boxPath
+		
 		shutil.copytree(srcPath,boxPath)
 	else:
 		print('cannot add the specified file into the box')
