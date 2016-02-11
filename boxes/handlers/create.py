@@ -6,6 +6,7 @@ class CreateHandler(handlerBase.BaseHandler):
 		super().__init__()
 
 	def handle(self):
+		super().handle()
 		import os
 		#check number of arguments
 		if self.__argumentNum != 1:
