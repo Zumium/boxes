@@ -3,7 +3,7 @@ from boxes import handlerBase
 class CreateHandler(handlerBase.BaseHandler):
 
 	def __init__(self):
-		super().init()
+		super().__init__()
 
 	def handle(self):
 		import os
