@@ -1,37 +1,26 @@
-import os
-import xml.etree.ElementTree as ET
+from boxes import BaseHandler
 
-def handle(storageXML,cmdXML):
-	#get folderpath and archivepath
-	folderPath=storageXML.find('folderPath').text
-	archivePath=storageXML.find('archivePath').text
-	#add / charactor if it is missing
-	if folderPath[len(folderPath)-1] != '/':
-		folderPath+='/'
-	if archivePath[len(archivePath)-1] != '/':
-		archivePath+='/'
-	#check number of parameters
-	actionElem=cmdXML.find('action')
-	if actionElem.attrib['paranum'] != '1':
-		print('CREATE command should be followed with only one argument')
-		exit()
-	#check parameter type
-	paraElem=cmdXML.find('para')
-	if paraElem.attrib['type'] != 'box':
-		print('CREATE command can be followed only with box name')
-		exit()
-	#create box folder under folderPath
-	boxName=paraElem.find('box').text
-	boxFolderFullPath=folderPath+boxName
-	#check if the box already exists
-	if os.path.isdir(boxFolderFullPath):
-		print('box already exists')
-		exit()
-	elif os.path.isfile(archivePath+boxName+'.tar.gz'):
-		print('box exists as an archivement')
-		exit()
-	os.mkdir(boxFolderFullPath)
-	#create hidden folder for storaging links
-	hiddenLinkFolderName='/.box'
-	os.mkdir(boxFolderFullPath+hiddenLinkFolderName)
-	
+class CreateHandler(BaseHandler):
+
+	def handle():
+		import os
+		#check number of arguments
+		if self.__argumentNum != 1:
+			print('CREATE command should be followed with only one argument')
+			return
+		#check arugments' type
+		if self.__arguments[0]['type'] != 'box':
+			print('CREATE command can only be followed with box name')
+			return
+		#check if the box already exists
+		boxName=self.__arguments[0]['box']
+		if self.__checkBoxExists(boxName):
+			print('box {} already exists'.format(boxName))
+			return
+		elif self.__checkArchivedBoxExists(boxName):
+			print('box {} already exists as an archived box'.format(boxName))
+			return
+		#create the box
+		os.mkdir(self.__getFullBoxPath(boxName))
+		#create specific foler
+		os.mkdir(self.__getBoxSpecificFolderPath(boxName))

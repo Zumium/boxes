@@ -54,6 +54,12 @@ class BaseHandler:
 	def __getFullArchivedBoxPath(self,boxName):
 		return self.__archivePath+boxName+self.__archiveTail
 
+	def __getBoxSpecificFolderPath(self,boxName,withSlash=False):
+		SpeFolder=self.__getFullBoxPath(boxName,withSlash=True)+'.box'
+		if withSlash:
+			SpeFolder+=self.__pathSeperator
+		return SpeFolder
+ 
 	def putArgument(self,cmdXML):
 		import xml.etree.ElementTree as ET
 		self.__argumentNum=int(cmdXML.find('action').attrib['paranum'])

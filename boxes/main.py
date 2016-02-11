@@ -16,13 +16,15 @@ def main():
 	#get folders and archives path and pack them into xml
 	folderPath=config['Default']['FolderPath']
 	archivePath=config['Default']['ArchivePath']
-	storage=ET.Element('storage')
-	ET.SubElement(storage,'folderPath').text=os.path.expanduser(folderPath) #Notice: in case that the user uses '~' symbol
-	ET.SubElement(storage,'archivePath').text=os.path.expanduser(archivePath)
+	#storage=ET.Element('storage')
+	#ET.SubElement(storage,'folderPath').text=os.path.expanduser(folderPath) #Notice: in case that the user uses '~' symbol
+	#ET.SubElement(storage,'archivePath').text=os.path.expanduser(archivePath)
 	
 	#
-	operaHandlers={'create':create.handle,'drop':drop.handle,'list-boxes':list_boxes.handle,'list-arch':list_archives.handle,'list':list_boxfile.handle,'add':add_file.handle}
+	#operaHandlers={'create':create.handle,'drop':drop.handle,'list-boxes':list_boxes.handle,'list-arch':list_archives.handle,'list':list_boxfile.handle,'add':add_file.handle}
+	operaHandlers={'create':create.CreateHandler}
 	cmdAction=xmlCmdArgs.find('action').text
-	operaHandlers[cmdAction](storage,xmlCmdArgs)
-	
-	
+	handlerInstance=operaHandlers[cmdAction]()
+	handlerInstance.setBoxPath(folderPath,archivePath)
+	handlerInstance.putArgument(xmlCmdArgs)
+	handlerInstance.handle()
