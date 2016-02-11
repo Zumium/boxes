@@ -2,7 +2,7 @@ from boxes import handlerBase
 
 class CreateHandler(handlerBase.BaseHandler):
 
-	def handle():
+	def handle(self):
 		import os
 		#check number of arguments
 		if self.__argumentNum != 1:

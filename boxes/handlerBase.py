@@ -80,7 +80,7 @@ class BaseHandler:
 				raise NameError('No such arugment type: {}'.format(x.attrib['type']))
 			self.__arguments.insert(int(x.attrib['index']),newPara)
 
-	def handle():
+	def handle(self):
 		#leave this function for blank now
 		#it will be overwrited in subclasses
 		pass
