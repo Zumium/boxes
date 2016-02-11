@@ -1,6 +1,6 @@
 class BaseHandler:
 	
-	def init(self):
+	def __init__(self):
 		import platform
 		#set up memeber variables
 		self.folderPath=None #unarchived boxes' path
