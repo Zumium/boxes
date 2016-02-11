@@ -2,6 +2,9 @@ from boxes import handlerBase
 
 class CreateHandler(handlerBase.BaseHandler):
 
+	def __init__(self):
+		super().__init__(self)
+
 	def handle(self):
 		import os
 		#check number of arguments
