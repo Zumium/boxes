@@ -7,18 +7,14 @@ class BaseHandler:
 		self.archivePath=None #archived boxes' path
 		self.argumentNum=None #numbers of parameters
 		self.arguments=None #parsed arguments are stored here
-		self.pathSeperator=None # '/' for UNIX-like and '\' for Windows
+		self.pathSeperator='/' # '/' for UNIX-like and '\' for Windows
 		self.archiveTail='.tar.gz' #compression format
 
 		#figure out current system type. UNIX or Windows?
 		if platform.system() == 'Windows':
 			#it's running on Windows
 			self.pathSeperator='\\'
-		else:
-			#it's running on UNIX or UNIX-like
-			self.pathSeperator='/'
-		
-	
+
 	def setBoxPath(self,boxPath,archivePath):
 		#expand ~ to user's real home path
 		import os.path
