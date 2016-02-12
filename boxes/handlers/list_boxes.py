@@ -1,13 +1,14 @@
-import os
-import xml.etree.ElementTree as ET
+from boxes import handlerBase
 
-def handle(storageXML,cmdXML):
-	#get folder path and archive path
-	folderPath=storageXML.find('folderPath').text
-	#and / if it is missing 
-	if folderPath[len(folderPath)-1] != '/':
-		folderPath+='/'
-	#get list of boxes
-	boxes=os.listdir(folderPath)
-	output=' '.join(boxes)
-	print(output)
+class ListBoxesHandler(handlerBase.BaseHandler):
+
+	def __init__(self):
+		super().__init__()
+
+	def handle(self):
+		import os
+		#get list of boxes
+		boxes_list=os.listdir(self.getFullBoxPath(''))
+		#print it out
+		output='   '.join(boxes_list)
+		print(output)
