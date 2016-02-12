@@ -1,45 +1,35 @@
-import os
-import xml.etree.ElementTree as ET
-import shutil
+from boxes import handlerBase
 
-def handle(storageXML,cmdXML):
-	#get folderpath and archivepath
-	folderPath=storageXML.find('folderPath').text
-	archivePath=storageXML.find('archivePath').text
-	#add / charactor if it is missing
-	if folderPath[len(folderPath)-1] != '/':
-		folderPath+='/'
-	if archivePath[len(archivePath)-1] != '/':
-		archivePath+='/'
-	#check number of parameters
-	actionElem=cmdXML.find('action')
-	if actionElem.attrib['paranum'] != '1':
-		print('DROP command should be followed with only one argument')
-		exit()
-	#check parameter type
-	paraElem=cmdXML.find('para')
-	if paraElem.attrib['type'] != 'box':
-		print('DROP command can be followed only with box name')
-		exit()
-	#create box folder under folderPath
-	boxName=paraElem.find('box').text
-	boxFolderFullPath=folderPath+boxName
-	#check if the box exists
-	boxPath={'isfolder':False,'path':''}
-	if os.path.isdir(boxFolderFullPath):
-		boxPath['isfolder']=True
-		boxPath['path']=boxFolderFullPath
-	elif os.path.isfile(archivePath+boxName+'.tar.gz'):
-		boxPath['isfolder']=False
-		boxPath['path']=archivePath+boxName+'.tar.gz'
-	else:
-		print("the box required doesn't exist")
-		exit()
-	#double check 
-	print('Are you going to delete box:{}(y/N)'.format(boxName))
-	answer=input()
-	if answer=='y':
-		if boxPath['isfolder']:
-			shutil.rmtree(boxPath['path'])
+class DropHandler(handlerBase.BaseHandler):
+
+	def __init__(self):
+		super().__init__()
+
+	def handle(self):
+		import shutil
+		import os
+		#check number of arguments
+		if self.argumentNum != 1:
+			print('DROP command should be followed with only one argument')
+			return
+		#check argument type
+		if self.arguments[0]['type'] != 'box':
+			print('DROP command can be only followed by box name')
+			return
+		#get box name
+		boxName=self.arguments[0]['box']
+		#check if the box exists
+		if not (self.checkBoxExits(boxName) or self.checkArchivedBoxExists(boxName)):
+			print('box {} doesn\'t exist'.format(boxName))
+			return
+		#ask user to confirm the operation
+		print('Are you sure to delete box {} ?'.format(boxName))
+		print('Note: All files will be lost (y/n)')
+		answer=input()
+		if answer == 'y':
+			if self.checkBoxExits(boxName):
+				shutil.removetree(self.getFullBoxPath(boxName))
+			else:
+				os.remove(getFullArchivedBoxPath(boxName))
 		else:
-			os.remove(boxPath['path'])
+			print('operation cancelled')
