@@ -27,7 +27,7 @@ class DropHandler(handlerBase.BaseHandler):
 		print('Note: All files will be lost (y/n)')
 		answer=input()
 		if answer == 'y':
-			if self.checkBoxExits(boxName):
+			if self.checkBoxExists(boxName):
 				shutil.removetree(self.getFullBoxPath(boxName))
 			else:
 				os.remove(getFullArchivedBoxPath(boxName))
