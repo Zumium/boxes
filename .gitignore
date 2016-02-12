@@ -1,3 +1,6 @@
 __pycache__
 *.swp
 test.py
+boxes.egg-info
+build
+dist
