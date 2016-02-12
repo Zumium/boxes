@@ -28,8 +28,8 @@ class DropHandler(handlerBase.BaseHandler):
 		answer=input()
 		if answer == 'y':
 			if self.checkBoxExists(boxName):
-				shutil.removetree(self.getFullBoxPath(boxName))
+				shutil.rmtree(self.getFullBoxPath(boxName))
 			else:
-				os.remove(getFullArchivedBoxPath(boxName))
+				os.remove(self.getFullArchivedBoxPath(boxName))
 		else:
 			print('operation cancelled')
