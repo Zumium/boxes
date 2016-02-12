@@ -19,7 +19,7 @@ class DropHandler(handlerBase.BaseHandler):
 		#get box name
 		boxName=self.arguments[0]['box']
 		#check if the box exists
-		if not (self.checkBoxExits(boxName) or self.checkArchivedBoxExists(boxName)):
+		if not (self.checkBoxExists(boxName) or self.checkArchivedBoxExists(boxName)):
 			print('box {} doesn\'t exist'.format(boxName))
 			return
 		#ask user to confirm the operation
