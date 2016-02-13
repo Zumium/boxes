@@ -17,11 +17,11 @@ class AddFileHandler(handlerBase.BaseHandler):
 			print('usage: boxes add BOX_NAME /path/to/file')
 			return
 		#check if box exists
-		if self.checkBoxExists(self.arguments[0]['box']):
+		if not self.checkBoxExists(self.arguments[0]['box']):
 			print('box {} doesn\'t exist'.format(self.arguments[0]['box']))
 			return
 		#check if path exists
-		if os.path.exists(self.arguments[1]['path']):
+		if not os.path.exists(self.arguments[1]['path']):
 			print('{} doesn\'t exist'.format(self.arguments[1]['path']))
 			return
 		#figure out path is file or directory
