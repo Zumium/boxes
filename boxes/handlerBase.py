@@ -56,6 +56,14 @@ class BaseHandler:
 			SpeFolder+=self.pathSeperator
 		return SpeFolder
  
+	def checkFileExists(self,boxName,fileName):
+		import os.path
+		thePath=self.getFullBoxPath(boxName,withSlash=True)+fileName
+		return os.path.exists(thePath)
+
+	def getFilePath(self,boxName,fileName):
+		return self.getFullBoxPath(boxName,withSlash=True)+fileName
+
 	def putArgument(self,cmdXML):
 		import xml.etree.ElementTree as ET
 		import os.path
