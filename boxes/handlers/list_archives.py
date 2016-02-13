@@ -1,16 +1,16 @@
-import os
-import xml.etree.ElementTree as ET
+from boxes import handlerBase
 
-def handle(storageXML,cmdXML):
-	#get folder path and archive path
-	archivePath=storageXML.find('archivePath').text
-	#and / if it is missing 
-	if archivePath[len(archivePath)-1] != '/':
-		archivePath+='/'
-	#get list of boxes
-	boxes=os.listdir(archivePath)
-	#get rid of .tar.gz tail
-	archive_boxes=list(map(lambda x:x[:x.find('.tar.gz')],boxes))
-	#print out the result
-	output=' '.join(archive_boxes)
-	print(output)
+class ListArchivesHandler(handlerBase.BaseHandler):
+	
+	def __init__(self):
+		super().__init__()
+
+	def handle(self):
+		import os
+		#get list of boxes
+		boxes_list=os.listdir(self.archivePath)
+		#drop .tar.gz tail
+		boxes_name=list(map(lambda x:x[:x.find(self.archiveTail)],boxes_list))
+		#print it out
+		output='   '.join(boxes_name)
+		print(output)
