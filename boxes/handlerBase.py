@@ -58,6 +58,7 @@ class BaseHandler:
  
 	def putArgument(self,cmdXML):
 		import xml.etree.ElementTree as ET
+		import os.path
 		self.argumentNum=int(cmdXML.find('action').attrib['paranum'])
 		self.arguments=list()
 		for x in cmdXML.findall('para'):
@@ -71,7 +72,7 @@ class BaseHandler:
 				newPara['file']=x.find('file').text
 			elif x.attrib['type'] == 'path':
 				newPara['type']='path'
-				newPara['path']=x.find('path').text
+				newPara['path']=os.path.expanduser(x.find('path').text)
 			else:
 				raise NameError('No such arugment type: {}'.format(x.attrib['type']))
 			self.arguments.insert(int(x.attrib['index']),newPara)
