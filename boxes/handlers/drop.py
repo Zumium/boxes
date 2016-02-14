@@ -8,6 +8,7 @@ class DropHandler(handlerBase.BaseHandler):
 	def handle(self):
 		import shutil
 		import os
+		import subprocess
 		#check number of arguments
 		if self.argumentNum != 1:
 			print('DROP command should be followed with only one argument')
@@ -28,6 +29,7 @@ class DropHandler(handlerBase.BaseHandler):
 		answer=input()
 		if answer == 'y':
 			if self.checkBoxExists(boxName):
+				subprocess.call(['boxes','unlink',boxName])
 				shutil.rmtree(self.getFullBoxPath(boxName))
 			else:
 				os.remove(self.getFullArchivedBoxPath(boxName))

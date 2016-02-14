@@ -9,6 +9,7 @@ class DelFileHandler(handlerBase.BaseHandler):
 		import os
 		import shutil
 		import os.path
+		import subprocess
 		#check number of argument
 		if self.argumentNum != 1:
 			print('DEL command should be followed with only 1 argument')
@@ -32,6 +33,7 @@ class DelFileHandler(handlerBase.BaseHandler):
 		print('The file will be lost permanently if you confirm(y/n)')
 		answer=input()
 		if answer == 'y':
+			subprocess.call(['boxes','unlink',boxName+':'+fileName])
 			if isDir:
 				shutil.rmtree(delPath)
 			else:
