@@ -15,6 +15,38 @@ class BaseHandler:
 			#it's running on Windows
 			self.pathSeperator='\\'
 
+	def getLinkFilePath(self,boxName,fileName=None):
+		#get hiddenf foler's path
+		hiddenFolder=self.getBoxSpecificFolderPath(boxName,withSlash=True)
+		if fileName == None:
+			#get box link list path
+			return hiddenFolder+boxName+'.boxlink'
+		else:
+			#get file path
+			return hiddenFolder+fileName+'.link'
+
+	def addLink(self,path,boxName,fileName=None):
+		linkFile=self.getLinkFilePath(boxName,fileName)
+		f=open(linkFile,'a')
+		f.write(path+'\n')
+		f.close()
+
+	def getLinkList(self,boxName,fileName=None):
+		linkFile=self.getLinkFilePath(boxName,fileName)
+		linkList=list()
+		f=open(linkFile)
+		for each in f:
+			linkList.append(each[:-1])
+		f.close()
+		return linkList
+
+	def writeLinkList(self,linkList,boxName,fileName=None):
+		linkFile=self.getLinkFilePath(boxName,fileName)
+		f=open(linkFile,'w')
+		for each in linkList:
+			f.write(each+'\n')
+		f.close()
+
 	def setBoxPath(self,boxPath,archivePath):
 		#expand ~ to user's real home path
 		import os.path
