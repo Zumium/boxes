@@ -7,6 +7,7 @@ class LinkHandler(handlerBase.BaseHandler):
 
 	def handle(self):
 		import os
+		import os.path
 		#check number of arguments
 		if self.argumentNum == 0:
 			print('LINK command need at least 1 argument')
@@ -40,7 +41,7 @@ class LinkHandler(handlerBase.BaseHandler):
 		boxName=None
 		fileName=None
 		linkFilePath=None
-		linkFileParentPath=self.arguments[1]['path']
+		linkFileParentPath=os.path.abspath(self.arguments[1]['path'])
 		if isBox:
 			boxName=self.arguments[0]['box']
 			linkFilePath=linkFileParentPath+boxName
