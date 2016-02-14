@@ -13,9 +13,12 @@ class LinkHandler(handlerBase.BaseHandler):
 			return
 		if self.argumentNum == 1:
 			#path is not set,use current working directory sas default
-			self.arguments.append({'path':os.getcwd(),'type':'path'})
+			cwdPath=os.getcwd()
+			if cwdPath[-1] != self.pathSeperator:
+				cwdPath+=self.pathSeperator
+			self.arguments.append({'path':cwdPath,'type':'path'})
 		#check type
-		if (self.arguments[0]['type'] != 'box' and arguments[0]['type'] != 'boxfile') or self.arguments[1]['type'] != 'path':
+		if (self.arguments[0]['type'] != 'box' and self.arguments[0]['type'] != 'boxfile') or self.arguments[1]['type'] != 'path':
 			print('usage: box link BOX[:FILE] /path/to/link')
 			return
 		#get link type
@@ -44,7 +47,7 @@ class LinkHandler(handlerBase.BaseHandler):
 			os.symlink(self.getBoxFullPath(boxName),linkFilePath)
 		else:
 			boxName=self.arguments[0]['box']
-			fileName=self.arguments[1]['file']
+			fileName=self.arguments[0]['file']
 			linkFilePath=linkFileParentPath+fileName
 			os.symlink(self.getFilePath(boxName,fileName),linkFilePath)
 		#add link path to record file
