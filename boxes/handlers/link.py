@@ -44,7 +44,7 @@ class LinkHandler(handlerBase.BaseHandler):
 		if isBox:
 			boxName=self.arguments[0]['box']
 			linkFilePath=linkFileParentPath+boxName
-			os.symlink(self.getBoxFullPath(boxName),linkFilePath)
+			os.symlink(self.getFullBoxPath(boxName),linkFilePath)
 		else:
 			boxName=self.arguments[0]['box']
 			fileName=self.arguments[0]['file']
