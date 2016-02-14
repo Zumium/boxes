@@ -15,7 +15,7 @@ class LinkHandler(handlerBase.BaseHandler):
 			#path is not set,use current working directory sas default
 			self.arguments.append({'path':os.getcwd(),'type':'path'})
 		#check type
-		if (self.arguments[0]['type'] != 'box' or self.arguments[0]['type'] != 'boxfile') or self.arguments[1]['type'] != 'path':
+		if (self.arguments[0]['type'] != 'box' and arguments[0]['type'] != 'boxfile') or self.arguments[1]['type'] != 'path':
 			print('usage: box link BOX[:FILE] /path/to/link')
 			return
 		#get link type
