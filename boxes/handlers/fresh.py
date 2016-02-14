@@ -11,26 +11,26 @@ class FreshHandler(handlerBase.BaseHandler):
 		if self.argumentNum == 0:
 			#fresh all boxes and all files
 			mode='all'
-		#check number of arguments
-		if self.argumentNum >= 2:
-			print('usage: boxes fresh [BOX[:FILE]]')
-			return
-		#check type
-		if self.argumentNum != 0:
+		else:
+			#check number of arguments
+			if self.argumentNum >= 2:
+				print('usage: boxes fresh [BOX[:FILE]]')
+				return
+			#check type
 			if self.arguments[0]['type'] != 'box' and self.arguments[0]['type'] != 'boxfile':
 				print('usage: boxes fresh [BOX[:FILE]]')
 				return
-		#select mode
-		if self.arguments[0]['type'] == 'box':
-			mode='box'
-		else:
-			mode='boxfile'
+			#select mode
+			if self.arguments[0]['type'] == 'box':
+				mode='box'
+			else:
+				mode='boxfile'
 		#call corresponding function
 		if mode == 'all':
 			self.freshall()
-		else mode == 'box':
+		elif mode == 'box':
 			self.freshbox(self.arguments[0]['box'])
-		else mode == 'boxfile':
+		elif mode == 'boxfile':
 			self.freshfile(self.arguments[0]['box'],self.arguments[0]['file'])
 
 	def freshfile(self,boxName,fileName):
@@ -47,13 +47,13 @@ class FreshHandler(handlerBase.BaseHandler):
 		fileList.remove('.box')
 		#unlink box
 		boxLinks=self.getLinkList(boxName)
-		newBoxLinks=list(filter(os.path.exists),boxLinks)
+		newBoxLinks=list(filter(os.path.exists,boxLinks))
 		self.writeLinkList(newBoxLinks,boxName)
 		#unlink file in the box:
 		for eachFile in fileList:
 			self.freshfile(boxName,eachFile)
 
-	def freshall():
+	def freshall(self):
 		import os
 		#get list of boxes
 		boxList=os.listdir(self.getFullBoxPath(''))
