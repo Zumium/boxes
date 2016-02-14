@@ -42,6 +42,9 @@ class LinkHandler(handlerBase.BaseHandler):
 		fileName=None
 		linkFilePath=None
 		linkFileParentPath=os.path.abspath(self.arguments[1]['path'])
+		if linkFileParentPath[-1] != self.pathSeperator:
+			linkFileParentPath+=self.pathSeperator
+
 		if isBox:
 			boxName=self.arguments[0]['box']
 			linkFilePath=linkFileParentPath+boxName
