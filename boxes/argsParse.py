@@ -10,7 +10,11 @@ def parseCmdline():
 	#build "action" element
 	action=ET.SubElement(cmd,'action')
 	action.attrib['paranum']=str(paramNum-2)
-	action.text=args[1]
+	#default action is help
+	action.text='help'
+	#get action
+	if paramNum != 1:
+		action.text=args[1]
 	#parse last two parameters
 	for index in list(range(2,paramNum)) :
 		param=args[index]
