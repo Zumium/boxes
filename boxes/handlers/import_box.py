@@ -22,4 +22,4 @@ class ImportHandler(handlerBase.BaseHandler):
 			print('{} is not a file'.format(importFilePath))
 			return
 		#copy tarfile to archived boxes' directory
-		shutil.copy(importFilePath,self.getFullBoxPath(''))
+		shutil.copy(importFilePath,self.archivePath)
