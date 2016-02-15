@@ -9,6 +9,7 @@ class BaseHandler:
 		self.arguments=None #parsed arguments are stored here
 		self.pathSeperator='/' # '/' for UNIX-like and '\' for Windows
 		self.archiveTail='.tar.gz' #compression format
+		self.compressType='gz'
 
 		#figure out current system type. UNIX or Windows?
 		if platform.system() == 'Windows':

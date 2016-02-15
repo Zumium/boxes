@@ -22,7 +22,7 @@ def main():
 	
 	#
 	#operaHandlers={'create':create.handle,'drop':drop.handle,'list-boxes':list_boxes.handle,'list-arch':list_archives.handle,'list':list_boxfile.handle,'add':add_file.handle}
-	operaHandlers={'create':create.CreateHandler,'drop':drop.DropHandler,'list':list_boxfile.ListBoxfileHandler,'list-boxes':list_boxes.ListBoxesHandler,'list-arch':list_archives.ListArchivesHandler,'add':add_file.AddFileHandler,'path':path.PathHandler,'del':del_file.DelFileHandler,'link':link.LinkHandler,'unlink':unlink.UnlinkHandler,'fresh':fresh.FreshHandler}
+	operaHandlers={'create':create.CreateHandler,'drop':drop.DropHandler,'list':list_boxfile.ListBoxfileHandler,'list-boxes':list_boxes.ListBoxesHandler,'list-arch':list_archives.ListArchivesHandler,'add':add_file.AddFileHandler,'path':path.PathHandler,'del':del_file.DelFileHandler,'link':link.LinkHandler,'unlink':unlink.UnlinkHandler,'fresh':fresh.FreshHandler,'archive':archive.ArchiveHandler}
 	cmdAction=xmlCmdArgs.find('action').text
 	handlerInstance=operaHandlers[cmdAction]()
 	handlerInstance.setBoxPath(folderPath,archivePath)
