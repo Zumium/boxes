@@ -13,9 +13,9 @@ class ListHandler(handlerBase.BaseHandler):
 			return
 		#list unarchived boxes
 		print('Boxes:')
-		print('   ',end='')
+		print('')
 		subprocess.call(['boxes','list-boxes'])
 		#list archived boxes
 		print('Archives:')
-		print('   ',end='')
+		print('')
 		subprocess.call(['boxes','list-arch'])
