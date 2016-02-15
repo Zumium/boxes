@@ -3,7 +3,8 @@ boxes drop BOX_NAME
 boxes mv BOX_NAME NEW_BOX_NAME
 boxes list-boxes
 boxes list-arch
-boxes list BOX_NAME //list files in the box
+boxes list-file BOX_NAME //list files in the box
+boxes list
 
 boxes link BOX_NAME[:FILE_NAME] [PATH]
 boxes unlink BOX_NAME
