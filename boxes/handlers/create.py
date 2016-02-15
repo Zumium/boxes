@@ -27,3 +27,5 @@ class CreateHandler(handlerBase.BaseHandler):
 		os.mkdir(self.getFullBoxPath(boxName))
 		#create specific foler
 		os.mkdir(self.getBoxSpecificFolderPath(boxName))
+		#create box's link file with blank content
+		self.writeLinkList([],boxName)
