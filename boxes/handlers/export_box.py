@@ -41,7 +41,7 @@ class ExportHandler(handlerBase.BaseHandler):
 		if isUnarchived:
 			#it is unarchived
 			#new a tar file
-			boxTarFile=tarfile.open('pathToCopyAt'+boxName+self.archiveTail,'w:'+self.compressType)
+			boxTarFile=tarfile.open(pathToCopyAt+boxName+self.archiveTail,'w:'+self.compressType)
 			#backup current working direcroty
 			preCwd=os.getcwd()
 			#change to boxes' parent directory
