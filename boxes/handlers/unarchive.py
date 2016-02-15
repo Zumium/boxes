@@ -9,6 +9,7 @@ class UnarchiveHandler(handlerBase.BaseHandler):
 		import os
 		import os.path
 		import tarfile
+		import subprocess
 		#check number of arguments
 		if self.argumentNum != 1:
 			print('usage: boxes unarchive BOX')
@@ -31,3 +32,5 @@ class UnarchiveHandler(handlerBase.BaseHandler):
 		boxTarFile.close()
 		#remove archive file
 		os.remove(self.getFullArchivedBoxPath(archivedBoxName))
+		#fresh it up
+		subprocess.call(['boxes','fresh',archivedBoxName])
