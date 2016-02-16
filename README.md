@@ -1,7 +1,5 @@
 #__boxes__ -- a simple tool to manage files
 
----
-
 ##Introduction
 
 __boxes__ is a tool to help you keep your files organized while still convenient to use. You create a folder with __boxes__ command called a "box" and there's no need for you to know the actual location of the folder. You can use ```boxes add``` command to copy you file into the box, and create a soft link of the box or files inside it to the path you want by fire ```boxes link``` command. Though this you can access your file wherever you want by placing a soft link there while keeps you files still organized.
