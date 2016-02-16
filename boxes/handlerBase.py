@@ -52,7 +52,10 @@ class BaseHandler:
 		f.close()
 
 	def getLinkList(self,boxName,fileName=None):
+		import os.path
 		linkFile=self.getLinkFilePath(boxName,fileName)
+		if not os.path.isfile(linkFile):
+			return []
 		linkList=list()
 		f=open(linkFile)
 		for each in f:
