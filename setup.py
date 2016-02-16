@@ -9,6 +9,9 @@ setup(
 	author="Zumium",
 	author_email="martin007323@gmail.com",
 	packages=['boxes','boxes.handlers'],
+	package_data={
+		'boxes':['README.md','LICENSE']
+	},
 	entry_points="""
 	[console_scripts]
 	boxes = boxes.main:main
