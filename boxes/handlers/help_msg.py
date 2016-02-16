@@ -7,6 +7,8 @@ class HelpHandler(handlerBase.BaseHandler):
 
 	def handle(self):
 		helpMessage='''
+Copyright (C) 2016 Zumium martin007323@gmail.com
+
 usage: boxes COMMAND [OPTIONAL ARGUMENTS]
 
 boxes create BOX_NAME	--	create a new box named BOX_NAME
@@ -25,5 +27,7 @@ boxes export BOX_NAME [PATH]	--	export a box to an outer file at given directory
 boxes add BOX_NAME FILE_NAME	--	copy given file into the given box
 boxes del BOX_NAME:FILE_NAME	--	delete the given file that is in the box
 boxes fresh [BOX_NAME[:FILE_NAME]] --	check links and delete those that are missing in record
+
+This software is released under Apache License Version 2.0 (http://www.apache.org/licenses/)
 '''
 		print(helpMessage)
