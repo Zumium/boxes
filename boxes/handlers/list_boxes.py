@@ -28,6 +28,8 @@ class ListBoxesHandler(handlerBase.BaseHandler):
 		import os
 		#get list of boxes
 		boxes_list=os.listdir(self.getFullBoxPath(''))
+		#don't display hidden folders
+		boxes_list=list(filter(lambda x:x[0]!='.',boxes_list))
 		#print it out
 		output='   '.join(boxes_list)
 		print(output)

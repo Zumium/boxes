@@ -27,6 +27,7 @@ class UnlinkHandler(handlerBase.BaseHandler):
 	def handle(self):
 		import subprocess
 		import os
+		import os.path
 		#check number of arguments
 		if self.argumentNum != 1:
 			print('usage: boxes unlink BOX[:FILE]')
@@ -63,13 +64,15 @@ class UnlinkHandler(handlerBase.BaseHandler):
 			#unlink box
 			boxLinks=self.getLinkList(boxName)
 			for each in boxLinks:
-				os.unlink(each)
+				if os.path.lexists(each):
+					os.unlink(each)
 			self.writeLinkList([],boxName)
 			#unlink each file
 			for eachFile in fileList:
 				links=self.getLinkList(boxName,eachFile)
 				for each in links:
-					os.unlink(each)
+					if os.path.lexists(each):
+						os.unlink(each)
 				self.writeLinkList([],boxName,eachFile)
 		else:
 			#fresh it first
