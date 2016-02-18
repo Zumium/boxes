@@ -21,6 +21,7 @@ class BaseHandler:
 	
 	def __init__(self):
 		import platform
+		import os
 		#set up memeber variables
 		self.folderPath=None #unarchived boxes' path
 		self.archivePath=None #archived boxes' path
@@ -29,6 +30,9 @@ class BaseHandler:
 		self.pathSeperator='/' # '/' for UNIX-like and '\' for Windows
 		self.archiveTail='.tar.gz' #compression format
 		self.compressType='gz'
+		self.lastOperatedBoxRecordFile=None; #last operated box record file
+		#set last operated box record file
+		self.lastOperatedBoxRecordFile=os.environ['TMPDIR']+'BOXES_LASTBOX.tmp'
 
 		#figure out current system type. UNIX or Windows?
 		if platform.system() == 'Windows':
@@ -119,6 +123,32 @@ class BaseHandler:
 	def getFilePath(self,boxName,fileName):
 		return self.getFullBoxPath(boxName,withSlash=True)+fileName
 
+	def checkLastOperatedBox(self):
+		import os
+		import os.path
+		#check if record file exists
+		lastBox=None
+		if os.path.isfile(self.lastOperatedBoxRecordFile):
+			#it exists
+			#get last box
+			recordFile=open(self.lastOperatedBoxRecordFile)
+			lastBox=recordFile.read()
+			recordFile.close()
+		else:
+			#it doesn't exist
+			#set lastBox to blank
+			lastBox=''
+		#replace last box symbol with actual box name
+		for x in self.arguments:
+			if x['type']=='box' or x['type']=='boxfile':
+				if x['box']=='#':
+					x['box']=lastBox
+				else:
+					#write new last box name to record file
+					recordFile=open(self.lastOperatedBoxRecordFile,'w')
+					recordFile.write(x['box'])
+					recordFile.close()
+
 	def putArgument(self,cmdXML):
 		import xml.etree.ElementTree as ET
 		import os.path
@@ -139,6 +169,7 @@ class BaseHandler:
 			else:
 				raise NameError('No such arugment type: {}'.format(x.attrib['type']))
 			self.arguments.insert(int(x.attrib['index']),newPara)
+			self.checkLastOperatedBox()
 
 	def handle(self):
 		#leave this function for blank now
