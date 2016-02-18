@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
 	name="boxes",
-	version="1.0.1",
+	version="1.0.2",
 	license="Apache License",
 	description="file organization tool",
 	author="Zumium",
