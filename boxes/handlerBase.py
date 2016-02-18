@@ -32,7 +32,7 @@ class BaseHandler:
 		self.compressType='gz'
 		self.lastOperatedBoxRecordFile=None; #last operated box record file
 		#set last operated box record file
-		self.lastOperatedBoxRecordFile=os.environ['TMPDIR']+'BOXES_LASTBOX.tmp'
+		self.lastOperatedBoxRecordFile='/tmp/BOXES_LASTBOX.tmp'
 
 		#figure out current system type. UNIX or Windows?
 		if platform.system() == 'Windows':
