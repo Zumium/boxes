@@ -33,7 +33,7 @@ class BaseHandler:
 		self.lastOperatedBoxRecordFile=None; #last operated box record file
 		#set last operated box record file
 		self.lastOperatedBoxRecordFile='/tmp/BOXES_LASTBOX.tmp'
-
+		self.lastBoxRepresentor='%%'
 		#figure out current system type. UNIX or Windows?
 		if platform.system() == 'Windows':
 			#it's running on Windows
@@ -141,7 +141,7 @@ class BaseHandler:
 		#replace last box symbol with actual box name
 		for x in self.arguments:
 			if x['type']=='box' or x['type']=='boxfile':
-				if x['box']=='#':
+				if x['box']==self.lastBoxRepresentor:
 					x['box']=lastBox
 				else:
 					#write new last box name to record file
