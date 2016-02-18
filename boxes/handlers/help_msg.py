@@ -63,6 +63,8 @@ boxes del BOX_NAME:FILE_NAME
 	delete the given file that is in the box
 boxes fresh [BOX_NAME[:FILE_NAME]]
 	check links and delete those that are missing in record
+boxes help
+	show this help message
 
 This software is released under Apache License Version 2.0 (http://www.apache.org/licenses/)
 '''
