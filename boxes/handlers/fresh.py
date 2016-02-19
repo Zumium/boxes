@@ -74,8 +74,13 @@ class FreshHandler(handlerBase.BaseHandler):
 
 	def freshall(self):
 		import os
+		import os.path
 		#get list of boxes
 		boxList=os.listdir(self.getFullBoxPath(''))
+		#remove all non-directory things
+		boxList=list(filter(lambda x:os.path.isdir(x),boxList))
+		#remove hidden folders
+		boxList=list(filter(lambda x:x[0]!='.',boxList))
 		#fresh each box
 		for eachBox in boxList:
 			self.freshbox(eachBox)
