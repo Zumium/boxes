@@ -19,6 +19,7 @@
 #under the License.
 import sys
 import xml.etree.ElementTree as ET
+import platform
 
 def parseCmdline():
 	#get number of parameters
@@ -34,6 +35,12 @@ def parseCmdline():
 	#get action
 	if paramNum != 1:
 		action.text=args[1]
+	pathSeperator=None
+	if platform.system() != 'Windows':
+		#take other systems as unix
+		pathSeperator='/'
+	else:
+		pathSeperator='\\'
 	#parse last two parameters
 	for index in list(range(2,paramNum)) :
 		param=args[index]
@@ -41,7 +48,7 @@ def parseCmdline():
 		para.attrib['index']=str(index-2)
 		if param.find(':') < 0 :
 			#box or path
-			if param.find('/') >= 0 :
+			if param.find(pathSeperator) >= 0 :
 				#is path
 				para.attrib['type']='path'
 				path=ET.SubElement(para,'path')

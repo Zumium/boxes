@@ -20,14 +20,22 @@
 import configparser
 import os
 import os.path
+import platform
 
 def getConfigPath():
-	configPath=[os.path.expanduser('~/.boxesrc'),'/usr/local/etc/boxes/boxesrc','/etc/boxes/boxesrc']
 	config=None
-	for confPath in configPath:
-		if os.path.isfile(confPath):
-			config=confPath
-			break
+	if platform.system() == 'Windows':
+		#on windows system
+		config=os.path.expanduser('~\\.boxesrc')
+		if not os.path.isfile(config):
+			config=None
+	else:
+		#on unix system
+		configPath=[os.path.expanduser('~/.boxesrc'),'/usr/local/etc/boxes/boxesrc','/etc/boxes/boxesrc']
+		for confPath in configPath:
+			if os.path.isfile(confPath):
+				config=confPath
+				break
 
 	if config==None:
 		print('config file not found')

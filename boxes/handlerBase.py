@@ -37,7 +37,11 @@ class BaseHandler:
 		#figure out current system type. UNIX or Windows?
 		if platform.system() == 'Windows':
 			#it's running on Windows
-			self.pathSeperator='\\'
+			self.pathSeperator='\\' #windows's path seperator is back-slash '\'
+			self.lastOperatedBoxRecordFile=os.environ['TEMP']
+			if self.lastOperatedBoxRecordFile[-1] != self.pathSeperator: #set last box record file to %TEMP%\BOXES_LASTBOX.tmp
+				self.lastOperatedBoxRecordFile+=self.pathSeperator
+			self.lastOperatedBoxRecordFile+='BOXES_LASTBOX.tmp'
 
 	def getLinkFilePath(self,boxName,fileName=None):
 		#get hiddenf foler's path
