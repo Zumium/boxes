@@ -26,3 +26,6 @@ boxes fresh
 +++++++++++++++++++++++++++++++++++++++++++++++
 
 boxes COMMAND [-参数] ARG1 [-参数] ARG2 [-命令参数]
+-p PATH
+-b BOX
+-f BOX:FILE

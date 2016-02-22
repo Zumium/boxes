@@ -22,49 +22,98 @@ import xml.etree.ElementTree as ET
 import platform
 
 def parseCmdline():
-	#get number of parameters
+	#get command line arguments
 	args=sys.argv
-	paramNum=len(args)
-	#build root element
-	cmd=ET.Element('cmd')
-	#build "action" element
-	action=ET.SubElement(cmd,'action')
-	action.attrib['paranum']=str(paramNum-2)
-	#default action is help
-	action.text='help'
-	#get action
-	if paramNum != 1:
-		action.text=args[1]
-	pathSeperator=None
-	if platform.system() != 'Windows':
-		#take other systems as unix
-		pathSeperator='/'
-	else:
-		pathSeperator='\\'
-	#parse last two parameters
-	for index in list(range(2,paramNum)) :
-		param=args[index]
-		para=ET.SubElement(cmd,'para')
-		para.attrib['index']=str(index-2)
-		if param.find(':') < 0 :
-			#box or path
-			if param.find(pathSeperator) >= 0 :
-				#is path
-				para.attrib['type']='path'
-				path=ET.SubElement(para,'path')
-				path.text=param
+	#number of arguments
+	numArgs=len(args)
+	#seperate different part
+	argsSepeGroup=list()
+	#add action
+	argsSepeGroup.append([args[1],'']) #leave second element blank for action arguments
+	firstArgPos=None
+	secondArsPos=None
+	#查找参数的位置
+	for index in range(2,numArgs):
+		if args[index][0] != '-':
+			if firstArgPos==None:
+				firstArgPos=index
+			elif secondArsPos==None:
+				secondArsPos=index
 			else:
-				#is box name
-				para.attrib['type']='box'
-				box=ET.SubElement(para,'box')
-				box.text=param
-		else:
-			#box_name:file_name
-			para.attrib['type']='boxfile'
-			paramSplit=param.split(':')
-			boxName=ET.SubElement(para,'box')
-			boxName.text=paramSplit[0]
-			fileName=ET.SubElement(para,'file')
-			fileName.text=paramSplit[1]
+				print('Too much arugments')
+				exit()
+	#截取参数并添加到参数组列表
+	if firstArgPos != None:
+		argsSepeGroup.append(args[2,firstArgPos+1])
+	if secondArsPos != None:
+		argsSepeGroup.append(args[firstArgPos+1,secondArsPos+1])
+	#解析action的附带参数
+	argsSepeGroup[0][1]=args[-1][1:]
+	#反转和去短横线
+	for index in range(1,len(argsSepeGroup)):
+		argsSepeGroup[index][0]=argsSepeGroup[index][0][1:]#去短横线
+		argsSepeGroup[index].reverse()#翻转
+	#生成解析树
+	return getParseTree(argsSepeGroup)
 
-	return cmd 
+def getParseTree(argsList):
+	#根节点
+	cmd=ET.Element('cmd')
+	#action 节点
+	action=ET.SubElement(cmd,'action')
+	action.attrib['paranum']=len(argsList)-1
+	action.attrib['args']=argsList[0][1]
+	#参数节点
+	for index in range(1,len(argsList)):
+		parameter=argsList[index]
+		argNode=ET.SubElement(action,'para')
+		argNode.attrib['index']=str(index-1)
+		if len(parameter) == 1:
+			#未指定类型，启用自动判断
+			pathSeperator=None
+			if platform.system() != 'Windows':
+				#take other systems as unix
+				pathSeperator='/'
+			else:
+				pathSeperator='\\'
+			if parameter[0].find(':') < 0 :
+				#box or path
+				if parameter[0].find(pathSeperator) >= 0 :
+					#is path
+					argNode.attrib['type']='path'
+					path=ET.SubElement(argNode,'path')
+					path.text=parameter[0]
+				else:
+					#is box name
+					argNode.attrib['type']='box'
+					box=ET.SubElement(argNode,'box')
+					box.text=parameter[0]
+			else:
+				#box_name:file_name
+				argNode.attrib['type']='boxfile'
+				paramSplit=parameter[0].split(':')
+				boxName=ET.SubElement(argNode,'box')
+				boxName.text=paramSplit[0]
+				fileName=ET.SubElement(argNode,'file')
+				fileName.text=paramSplit[1]
+		else:
+			#指定了类型
+			if parameter[1] == 'p':
+				#指定为path类型
+				argNode.attrib['type']='path'
+				path=ET.SubElement(argNode,'path')
+				path.text=parameter[0]
+			elif parameter[1] == 'b':
+				#指定为box类型
+				argNode.attrib['type']='box'
+				box=ET.SubElement(argNode,'box')
+				box.text=parameter[0]
+			elif parameter[1] == 'f':
+				#指定为box:file类型
+				argNode.attrib['type']='boxfile'
+				boxNode=ET.SubElement(argNode,'box')
+				fileNode=ET.SubElement(argNode,'file')
+				boxFileSepeList=parameter.split(':')
+				boxNode.text=boxFileSepeList[0]
+				fileNode.text=boxFileSepeList[1]
+	return cmd
