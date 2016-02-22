@@ -1,7 +1,7 @@
 XML Format:
 
 <cmd>
-	<action paranum=0,1,2,...>
+	<action paranum=0,1,2,... args="a,b,c,d...">
 		same as action in cmd parameters
 	</action>
 	<para index=0,1 type=box,file,boxfile,path>

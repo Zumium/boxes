@@ -22,3 +22,7 @@ boxes del BOX_NAME:FILE_NAME
 boxes mv BOX_NAME:FILE_NAME [BOX_NAME:]FILE_NAME
 
 boxes fresh
+
++++++++++++++++++++++++++++++++++++++++++++++++
+
+boxes COMMAND [-参数] ARG1 [-参数] ARG2 [-命令参数]
