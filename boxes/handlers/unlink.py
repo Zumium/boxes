@@ -57,7 +57,7 @@ class UnlinkHandler(handlerBase.BaseHandler):
 				return
 		if isBox:
 			#fresh it first
-			subprocess.call(['boxes','fresh',boxName])
+			subprocess.call(['boxes','fresh','-b',boxName])
 			#get file list in the box
 			fileList=os.listdir(self.getFullBoxPath(boxName))
 			fileList.remove('.box')

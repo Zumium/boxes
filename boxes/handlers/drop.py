@@ -48,7 +48,7 @@ class DropHandler(handlerBase.BaseHandler):
 		answer=input()
 		if answer == 'y':
 			if self.checkBoxExists(boxName):
-				subprocess.call(['boxes','unlink',boxName])
+				subprocess.call(['boxes','unlink','-b',boxName])
 				shutil.rmtree(self.getFullBoxPath(boxName))
 			else:
 				os.remove(self.getFullArchivedBoxPath(boxName))

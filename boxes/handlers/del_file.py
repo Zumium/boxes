@@ -52,7 +52,7 @@ class DelFileHandler(handlerBase.BaseHandler):
 		print('The file will be lost permanently if you confirm(y/n)')
 		answer=input()
 		if answer == 'y':
-			subprocess.call(['boxes','unlink',boxName+':'+fileName])
+			subprocess.call(['boxes','unlink','-f',boxName+':'+fileName])
 			if isDir:
 				shutil.rmtree(delPath)
 			else:

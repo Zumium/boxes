@@ -55,7 +55,7 @@ class ArchiveHandler(handlerBase.BaseHandler):
 		#create archive file
 		boxTarFile=tarfile.open(self.getFullArchivedBoxPath(boxName),'w:'+self.compressType)
 		#unlink the box
-		subprocess.call(['boxes','unlink',boxName])
+		subprocess.call(['boxes','unlink','-b',boxName])
 		#add box to tarfile
 		boxTarFile.add(boxName)
 		#close tarfile

@@ -52,4 +52,4 @@ class UnarchiveHandler(handlerBase.BaseHandler):
 		#remove archive file
 		os.remove(self.getFullArchivedBoxPath(archivedBoxName))
 		#fresh it up
-		subprocess.call(['boxes','fresh',archivedBoxName])
+		subprocess.call(['boxes','fresh','-b',archivedBoxName])
