@@ -68,7 +68,7 @@ def getParseTree(argsList):
 	#参数节点
 	for index in range(1,len(argsList)):
 		parameter=argsList[index]
-		argNode=ET.SubElement(action,'para')
+		argNode=ET.SubElement(cmd,'para')
 		argNode.attrib['index']=str(index-1)
 		if len(parameter) == 1:
 			#未指定类型，启用自动判断
