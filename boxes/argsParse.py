@@ -115,7 +115,7 @@ def getParseTree(argsList):
 				argNode.attrib['type']='boxfile'
 				boxNode=ET.SubElement(argNode,'box')
 				fileNode=ET.SubElement(argNode,'file')
-				boxFileSepeList=parameter.split(':')
+				boxFileSepeList=parameter[0].split(':')
 				boxNode.text=boxFileSepeList[0]
 				fileNode.text=boxFileSepeList[1]
 	return cmd
