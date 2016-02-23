@@ -44,15 +44,17 @@ def parseCmdline():
 				exit()
 	#截取参数并添加到参数组列表
 	if firstArgPos != None:
-		argsSepeGroup.append(args[2,firstArgPos+1])
+		argsSepeGroup.append(args[2:firstArgPos+1])
 	if secondArsPos != None:
-		argsSepeGroup.append(args[firstArgPos+1,secondArsPos+1])
+		argsSepeGroup.append(args[firstArgPos+1:secondArsPos+1])
 	#解析action的附带参数
-	argsSepeGroup[0][1]=args[-1][1:]
+	if args[-1][0]=='-':
+		argsSepeGroup[0][1]=args[-1][1:]
 	#反转和去短横线
 	for index in range(1,len(argsSepeGroup)):
-		argsSepeGroup[index][0]=argsSepeGroup[index][0][1:]#去短横线
-		argsSepeGroup[index].reverse()#翻转
+		if len(argsSepeGroup[index]) != 1:
+			argsSepeGroup[index][0]=argsSepeGroup[index][0][1:]#去短横线
+			argsSepeGroup[index].reverse()#翻转
 	#生成解析树
 	return getParseTree(argsSepeGroup)
 
@@ -61,7 +63,7 @@ def getParseTree(argsList):
 	cmd=ET.Element('cmd')
 	#action 节点
 	action=ET.SubElement(cmd,'action')
-	action.attrib['paranum']=len(argsList)-1
+	action.attrib['paranum']=str(len(argsList)-1)
 	action.attrib['args']=argsList[0][1]
 	#参数节点
 	for index in range(1,len(argsList)):
