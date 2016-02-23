@@ -65,6 +65,7 @@ def getParseTree(argsList):
 	action=ET.SubElement(cmd,'action')
 	action.attrib['paranum']=str(len(argsList)-1)
 	action.attrib['args']=argsList[0][1]
+	action.text=argsList[0][0]
 	#参数节点
 	for index in range(1,len(argsList)):
 		parameter=argsList[index]
